@@ -1,6 +1,6 @@
 {
-  "name": "Semyok Dashboard",
-  "short_name": "Semyok",
+  "name": "Seryeok Dashboard",
+  "short_name": "Seryeok",
   "description": "세력폭발 가능 종목 스크리너",
   "start_url": "./index.html",
   "display": "standalone",

@@ -1,8 +1,9 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semyok Dashboard</title>
+  <title>Seryeok Dashboard</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon-192.png">
   <link rel="apple-touch-icon" href="icon-512.png">
@@ -10,14 +11,22 @@
 </head>
 <body>
   <header>
-    <h1>Semyok Dashboard</h1>
+    <h1>Seryeok Dashboard</h1>
     <button id="settingsBtn">Settings</button>
-  </header>  <main id="dashboard">
+  </header>
+
+  <main id="dashboard">
     <!-- 분석 결과 테이블이 들어갈 곳 -->
-  </main>  <div id="settingsModal" class="modal">
+  </main>
+
+  <div id="settingsModal" class="modal">
     <h2>Settings</h2>
     <label for="fontSizeRange">Font Size:</label>
     <input type="range" id="fontSizeRange" min="12" max="24" value="16">
     <button id="restoreDefault">Restore Default</button>
-  </div>  <script src="app.js"></script>  <script src="settings.js"></script></body>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="settings.js"></script>
+</body>
 </html>

@@ -1,37 +1,28 @@
-document.getElementById('runScan').addEventListener('click', async () => {
-  const data = await fetchScanData();
-  updateTable(data);
-  localStorage.setItem('lastScan', JSON.stringify(data));
-});
-
-async function fetchScanData() {
-  return [
-    {ticker:'ABCD', prev:1.24, curr:1.21, mcap:'50억', gap:'-2.41%', fear:10, structure:'매집', intent:0.70, utility:0.65},
-    {ticker:'EFGH', prev:0.85, curr:0.83, mcap:'30억', gap:'-2.35%', fear:12, structure:'관리', intent:0.60, utility:0.55}
-  ];
-}
-
-function updateTable(data){
-  const tbody = document.querySelector('#topTable tbody');
-  tbody.innerHTML = '';
-  data.forEach(item => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${item.ticker}</td>
-      <td>${item.prev}</td>
-      <td>${item.curr} (${item.gap})</td>
-      <td>${item.mcap}</td>
-      <td>${item.gap}</td>
-      <td>${item.fear}%</td>
-      <td>${item.structure}</td>
-      <td>${item.intent}</td>
-      <td>${item.utility}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
 window.addEventListener('load', () => {
-  const lastScan = localStorage.getItem('lastScan');
-  if(lastScan){ updateTable(JSON.parse(lastScan)); }
+  const dashboard = document.getElementById('dashboard');
+
+  // 예시 데이터
+  const data = [
+    {ticker: 'ABCD', prevClose: 1.24, current: 1.21, marketCap: '150억', gap: '-2.41%', fearDown: '10%', structureType: 'A', intentionScore: 0.35, timeEfficiency: 0.8},
+    {ticker: 'EFGH', prevClose: 0.95, current: 0.92, marketCap: '80억', gap: '-3.15%', fearDown: '12%', structureType: 'B', intentionScore: 0.30, timeEfficiency: 0.6}
+  ];
+
+  let table = '<table><tr><th>Ticker</th><th>전일종가</th><th>현재가</th><th>시총</th><th>주가/세력가 괴리</th><th>공포 하방</th><th>구조 유형</th><th>의도 점수</th><th>시간효용</th></tr>';
+
+  data.forEach(row => {
+    table += `<tr>
+      <td>${row.ticker}</td>
+      <td>${row.prevClose}</td>
+      <td>${row.current} (${row.gap})</td>
+      <td>${row.marketCap}</td>
+      <td>${row.gap}</td>
+      <td>${row.fearDown}</td>
+      <td>${row.structureType}</td>
+      <td>${row.intentionScore}</td>
+      <td>${row.timeEfficiency}</td>
+    </tr>`;
+  });
+
+  table += '</table>';
+  dashboard.innerHTML = table;
 });
