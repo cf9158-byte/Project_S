@@ -1,59 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seryeok Dashboard</title>
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-512.png">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>SR Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Seryeok Dashboard</h1>
-    <button id="analyzeBtn">분석 실행</button>
-    <button id="settingsBtn">설정</button>
-  </header>
-
-  <main id="dashboard">
-    <p>데이터를 불러오는 중...</p>
-  </main>
-
-  <div id="settingsModal" class="modal">
-    <h2>환경설정</h2>
-    <div class="setting-group">
-      <label for="fontSizeRange">폰트 크기:</label>
-      <input type="range" id="fontSizeRange" min="12" max="24" value="16">
-    </div>
-    <div class="setting-group">
-      <label for="volPercent">전일 대비 거래량 기준 (%)</label>
-      <input type="number" id="volPercent" value="500">
-    </div>
-    <div class="setting-group">
-      <label for="priceGapPercent">가격 변동폭 기준 (%)</label>
-      <input type="number" id="priceGapPercent" value="5">
-    </div>
-    <div class="setting-group">
-      <label for="avgGapPercent">세력평단 괴리 허용 (%)</label>
-      <input type="number" id="avgGapPercent" value="5">
-    </div>
-    <div class="setting-group">
-      <label for="fearBase">공포 하방 계산 기준 (%)</label>
-      <input type="number" id="fearBase" value="3">
-    </div>
-    <button id="saveSettings">저장</button>
-    <button id="restoreDefault">기본값 복구</button>
-    <button id="closeSettings">닫기</button>
+<header class="app-header">
+  <h1>SR Board</h1>
+  <div class="header-buttons">
+    <button onclick="searchStocks()">검색</button>
+    <button onclick="location.href='settings.html'">설정</button>
   </div>
+</header>
 
-  <div id="detailModal" class="modal">
-    <h2 id="detailTicker">세부 정보</h2>
-    <div id="detailContent"></div>
-    <button id="closeDetail">닫기</button>
-  </div>
+<main>
+  <div id="dateLabel"></div>
 
-  <script src="app.js"></script>
-  <script src="settings.js"></script>
+  <table class="stock-table">
+    <thead>
+      <tr>
+        <th>티커</th>
+        <th>현재가</th>
+        <th>전일대비</th>
+        <th>세력평단</th>
+        <th>괴리</th>
+        <th>폭발확률</th>
+        <th>등급</th>
+      </tr>
+    </thead>
+    <tbody id="stockList"></tbody>
+  </table>
+</main>
+
+<script src="logic.js"></script>
+<script src="app.js"></script>
+<script>
+  registerSW();
+  renderMainList();
+</script>
 </body>
 </html>
