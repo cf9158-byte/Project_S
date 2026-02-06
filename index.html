@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seryeok Dashboard</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon-192.png">
-  <link rel="apple-touch-icon" href="icon-512.png">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seryeok Dashboard</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
@@ -16,7 +16,7 @@
   </header>
 
   <main id="dashboard">
-    <!-- 분석 결과 테이블이 들어갈 곳 -->
+    <p>데이터를 불러오는 중...</p>
   </main>
 
   <div id="settingsModal" class="modal">
@@ -24,6 +24,7 @@
     <label for="fontSizeRange">Font Size:</label>
     <input type="range" id="fontSizeRange" min="12" max="24" value="16">
     <button id="restoreDefault">Restore Default</button>
+    <button id="closeSettings">Close</button>
   </div>
 
   <script src="app.js"></script>

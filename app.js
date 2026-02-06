@@ -1,28 +1,76 @@
-window.addEventListener('load', () => {
-  const dashboard = document.getElementById('dashboard');
+const dashboard = document.getElementById('dashboard');
 
-  // 예시 데이터
-  const data = [
-    {ticker: 'ABCD', prevClose: 1.24, current: 1.21, marketCap: '150억', gap: '-2.41%', fearDown: '10%', structureType: 'A', intentionScore: 0.35, timeEfficiency: 0.8},
-    {ticker: 'EFGH', prevClose: 0.95, current: 0.92, marketCap: '80억', gap: '-3.15%', fearDown: '12%', structureType: 'B', intentionScore: 0.30, timeEfficiency: 0.6}
-  ];
+function calculateSeryeokMetrics(stock){
+  const gap = ((stock.current - stock.avgPrice)/stock.avgPrice*100).toFixed(1);
+  let fearDown = 0;
+  let structureType = '';
+  let intentionScore = 0;
+  let timeEfficiency = '';
 
-  let table = '<table><tr><th>Ticker</th><th>전일종가</th><th>현재가</th><th>시총</th><th>주가/세력가 괴리</th><th>공포 하방</th><th>구조 유형</th><th>의도 점수</th><th>시간효용</th></tr>';
+  // 공포 하방 % (예시 로직)
+  if(stock.current < stock.avgPrice) fearDown = Math.min(100, ((stock.avgPrice - stock.current)/stock.avgPrice*100).toFixed(1));
 
-  data.forEach(row => {
-    table += `<tr>
-      <td>${row.ticker}</td>
-      <td>${row.prevClose}</td>
-      <td>${row.current} (${row.gap})</td>
-      <td>${row.marketCap}</td>
-      <td>${row.gap}</td>
-      <td>${row.fearDown}</td>
-      <td>${row.structureType}</td>
-      <td>${row.intentionScore}</td>
-      <td>${row.timeEfficiency}</td>
-    </tr>`;
-  });
+  // 구조 유형
+  if(stock.current > stock.avgPrice) structureType = '매집+상단테스트';
+  else if(stock.current < stock.avgPrice) structureType = '분배+하방방어';
+  else structureType = '평가 중';
 
-  table += '</table>';
-  dashboard.innerHTML = table;
-});
+  // 의도 점수
+  intentionScore = Math.min(100, (Math.abs(stock.current - stock.avgPrice)/stock.avgPrice*200).toFixed(0));
+
+  // 시간 효용 (임시)
+  timeEfficiency = stock.volume > 100000 ? '높음' : '보통';
+
+  return {gap, fearDown, structureType, intentionScore, timeEfficiency};
+}
+
+async function fetchData(){
+  try{
+    const response = await fetch('data.json');
+    const data = await response.json();
+
+    if(!data || data.length === 0){
+      dashboard.innerHTML = '<p>데이터가 없습니다.</p>';
+      return;
+    }
+
+    let table = `<table>
+      <tr>
+        <th>Ticker</th>
+        <th>전일종가</th>
+        <th>현재가</th>
+        <th>거래량</th>
+        <th>평단</th>
+        <th>주가/세력가 괴리(%)</th>
+        <th>공포 하방(%)</th>
+        <th>구조 유형</th>
+        <th>의도 점수</th>
+        <th>시간효용</th>
+      </tr>`;
+
+    data.forEach(stock => {
+      const metrics = calculateSeryeokMetrics(stock);
+      table += `<tr>
+        <td>${stock.ticker}</td>
+        <td>${stock.prevClose}</td>
+        <td>${stock.current}</td>
+        <td>${stock.volume}</td>
+        <td>${stock.avgPrice}</td>
+        <td>${metrics.gap}</td>
+        <td>${metrics.fearDown}</td>
+        <td>${metrics.structureType}</td>
+        <td>${metrics.intentionScore}</td>
+        <td>${metrics.timeEfficiency}</td>
+      </tr>`;
+    });
+
+    table += '</table>';
+    dashboard.innerHTML = table;
+
+  }catch(err){
+    dashboard.innerHTML = `<p>데이터 불러오기 실패: ${err}</p>`;
+    console.error(err);
+  }
+}
+
+window.addEventListener('load', fetchData);
