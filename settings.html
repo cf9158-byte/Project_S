@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>SR Board - Settings</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>SR Board - Settings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="app-header">
@@ -13,26 +13,30 @@
 </header>
 
 <main class="settings">
-  <section>
-    <h2>글자 크기</h2>
-    <div class="font-buttons">
-      <button onclick="setFont(1)">XS</button>
-      <button onclick="setFont(2)">S</button>
-      <button onclick="setFont(3)">M</button>
-      <button onclick="setFont(4)">L</button>
-      <button onclick="setFont(5)">XL</button>
-    </div>
-  </section>
+<section>
+<h2>글자 크기</h2>
+<div class="font-buttons">
+<button onclick="setFont(1)">XS</button>
+<button onclick="setFont(2)">S</button>
+<button onclick="setFont(3)">M</button>
+<button onclick="setFont(4)">L</button>
+<button onclick="setFont(5)">XL</button>
+</div>
+</section>
 
-  <section>
-    <h2>세력 검출 기준</h2>
-    <label>폭발 최소 확률 (%)</label>
-    <input type="number" id="minProb" value="60">
-  </section>
+<section>
+<h2>세력 검출 기준</h2>
+<label>거래량 배율 <input id="volMul"></label>
+<label>변동성 제한 % <input id="priceLimit"></label>
+<label>괴리 가중치 <input id="gapWeight"></label>
+<label>하방 민감도 <input id="fearWeight"></label>
+<label>시간효율 기준일 <input id="timeLimit"></label>
+<label>폭발확률 컷 <input id="probCut"></label>
+</section>
 
-  <section>
-    <button class="danger" onclick="resetDefault()">디폴트 복구</button>
-  </section>
+<section>
+<button class="danger" onclick="confirmReset()">디폴트 복구</button>
+</section>
 </main>
 
 <script src="logic.js"></script>

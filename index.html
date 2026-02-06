@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>SR Board</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>SR Board</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="app-header">
   <h1>SR Board</h1>
-  <div class="header-buttons">
-    <button onclick="searchStocks()">검색</button>
+  <div>
+    <button onclick="toggleSort()">정렬</button>
     <button onclick="location.href='settings.html'">설정</button>
   </div>
 </header>
 
-<main>
-  <div id="dateLabel"></div>
+<div id="dateLabel"></div>
 
-  <table class="stock-table">
-    <thead>
-      <tr>
-        <th>티커</th>
-        <th>현재가</th>
-        <th>전일대비</th>
-        <th>세력평단</th>
-        <th>괴리</th>
-        <th>폭발확률</th>
-        <th>등급</th>
-      </tr>
-    </thead>
-    <tbody id="stockList"></tbody>
-  </table>
-</main>
+<div class="table-wrap">
+<table class="stock-table">
+<thead>
+<tr>
+  <th class="sticky">티커</th>
+  <th>종합등급</th>
+  <th>폭발규모</th>
+  <th>전날가</th>
+  <th>현재가</th>
+  <th>전일대비</th>
+  <th>시총(₩)</th>
+  <th>괴리</th>
+  <th>하방</th>
+  <th>유형</th>
+</tr>
+</thead>
+<tbody id="stockList"></tbody>
+</table>
+</div>
 
 <script src="logic.js"></script>
 <script src="app.js"></script>
 <script>
-  registerSW();
-  renderMainList();
+registerSW();
+renderMainList();
 </script>
 </body>
 </html>

@@ -1,43 +1,34 @@
-const sampleDB = [
-  {
-    ticker: "AZTR",
-    prices: [1.21,1.20,1.19,1.20,1.19],
-    volumes: [10,9,8,40,9],
-    close: 1.19,
-    prev: 1.20
-  },
-  {
-    ticker: "POLA",
-    prices: [1.42,1.40,1.39,1.40,1.38],
-    volumes: [8,7,6,50,6],
-    close: 1.38,
-    prev: 1.40
-  }
-];
+const sampleDB = Array.from({length:30},(_,i)=>({
+ ticker:`TST${i+1}`,
+ prev:1+Math.random(),
+ close:1+Math.random(),
+ prices:Array.from({length:10},()=>1+Math.random()),
+ volumes:Array.from({length:10},()=>5+Math.random()*50),
+ mcap:Math.floor(200+Math.random()*800)*1e9,
+ daysSinceVolume:Math.floor(Math.random()*10)
+}));
 
-function analyzeSeryeok(stock) {
-  const volSpike = Math.max(...stock.volumes) / stock.volumes[0];
-  const priceRange = Math.abs(stock.close - stock.prev) / stock.prev * 100;
+function analyzeSeryeok(s){
+ const avg=s.prices.reduce((a,b)=>a+b)/s.prices.length;
+ const gap=((s.close-avg)/avg)*100;
+ const volSpike=Math.max(...s.volumes)/s.volumes[0];
+ const range=Math.abs(s.close-s.prev)/s.prev*100;
 
-  const accumulation = volSpike > 5 && priceRange < 5;
-  const avgCost = stock.prices.reduce((a,b)=>a+b)/stock.prices.length;
-  const gap = ((stock.close - avgCost) / avgCost) * 100;
+ let prob=0;
+ if(volSpike>5) prob+=30;
+ if(range<5) prob+=25;
+ if(gap<-5) prob+=25;
+ if(s.daysSinceVolume<3) prob+=20;
 
-  let probability = 0;
-  if (accumulation) probability += 40;
-  if (gap < -5) probability += 30;
-  if (priceRange < 3) probability += 20;
+ const grade=prob>80?"S":prob>65?"A":prob>50?"B":"C";
+ const power=prob>75?"S":prob>60?"A":prob>45?"B":"C";
 
-  const grade =
-    probability > 80 ? "S" :
-    probability > 65 ? "A" :
-    probability > 50 ? "B" : "C";
+ const fear=Math.max(0,Math.abs(gap)*0.6);
 
-  return {
-    ...stock,
-    avgCost: avgCost.toFixed(2),
-    gap: gap.toFixed(1),
-    probability,
-    grade
-  };
+ const type =
+   prob>70 && gap<0 ? "관리" :
+   prob>55 ? "재매집" : "위험";
+
+ return {...s,avg:avg.toFixed(2),gap:gap.toFixed(1),
+ prob,power,fear:fear.toFixed(1),type,grade};
 }

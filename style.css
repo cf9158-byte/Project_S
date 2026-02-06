@@ -1,59 +1,8 @@
-:root {
-  --bg: #0e1117;
-  --card: #161b22;
-  --text: #e6edf3;
-  --accent: #4fa3ff;
+.table-wrap{overflow-x:auto;}
+.sticky{
+ position:sticky;
+ left:0;
+ background:#161b22;
+ z-index:2;
 }
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, sans-serif;
-  font-size: var(--font-size, 14px);
-}
-
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  background: var(--card);
-}
-
-.stock-table {
-  width: 100%;
-  border-collapse: collapse;
-  white-space: nowrap;
-}
-
-.stock-table th, .stock-table td {
-  padding: 8px;
-  text-align: center;
-  border-bottom: 1px solid #222;
-}
-
-.stock-table tr:hover {
-  background: #1f2633;
-  cursor: pointer;
-}
-
-button {
-  background: var(--accent);
-  border: none;
-  color: #000;
-  padding: 6px 10px;
-  border-radius: 6px;
-}
-
-.settings section {
-  margin: 16px;
-}
-
-.font-buttons button {
-  margin-right: 6px;
-}
-
-.danger {
-  background: #ff4f4f;
-}
+.detail p{line-height:1.6}
