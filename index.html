@@ -1,45 +1,23 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="manifest" href="./manifest.json">
-  <link rel="stylesheet" href="./style.css">
-  <title>세력폭발 스크리너</title>
+  <title>Semyok Dashboard</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-512.png">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>세력폭발 Top 30</h1>
-    <button id="toggleTheme">다크/라이트</button>
-    <button id="settingsBtn">환경설정</button>
-    <button id="runScan">분석 실행</button>
-  </header>
-
-  <main>
-    <table id="topTable">
-      <thead>
-        <tr>
-          <th>티커</th>
-          <th>전일종가</th>
-          <th>현재가</th>
-          <th>시총</th>
-          <th>주가/세력가 괴리</th>
-          <th>공포 하방</th>
-          <th>구조 유형</th>
-          <th>의도 점수</th>
-          <th>시간효용</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </main>
-
-  <div id="settingsModal" class="modal">
-    <button id="restoreDefault">기본값 복구</button>
-    <label>폰트 크기: <input type="range" id="fontSizeRange" min="12" max="24" value="16"></label>
-  </div>
-
-  <script src="./settings.js"></script>
-  <script src="./app.js"></script>
-</body>
+    <h1>Semyok Dashboard</h1>
+    <button id="settingsBtn">Settings</button>
+  </header>  <main id="dashboard">
+    <!-- 분석 결과 테이블이 들어갈 곳 -->
+  </main>  <div id="settingsModal" class="modal">
+    <h2>Settings</h2>
+    <label for="fontSizeRange">Font Size:</label>
+    <input type="range" id="fontSizeRange" min="12" max="24" value="16">
+    <button id="restoreDefault">Restore Default</button>
+  </div>  <script src="app.js"></script>  <script src="settings.js"></script></body>
 </html>
