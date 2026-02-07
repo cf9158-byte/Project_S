@@ -1,48 +1,62 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>SR Board</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>sery eok Scanner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header class="app-header">
-  <h1>SR Board</h1>
-  <div>
-    <button onclick="toggleSort()">정렬</button>
+
+<header>
+  <h1>sery eok</h1>
+  <div class="header-buttons">
+    <button id="analyzeBtn">분석</button>
     <button onclick="location.href='settings.html'">설정</button>
   </div>
 </header>
 
-<div id="dateLabel"></div>
+<section class="filters">
+  <select id="filterGrade">
+    <option value="">종합등급</option>
+    <option>S</option><option>A</option><option>B</option><option>C</option>
+  </select>
+  <select id="filterSize">
+    <option value="">폭발규모</option>
+    <option>S</option><option>A</option><option>B</option><option>C</option>
+  </select>
+  <select id="filterType">
+    <option value="">유형</option>
+    <option>매집관리</option>
+    <option>하방공포유도</option>
+    <option>상단테스트</option>
+    <option>관리이탈</option>
+    <option>재폭발대기</option>
+    <option>분배구간</option>
+    <option>위험</option>
+  </select>
+</section>
 
-<div class="table-wrap">
-<table class="stock-table">
-<thead>
-<tr>
-  <th class="sticky">티커</th>
-  <th>종합등급</th>
-  <th>폭발규모</th>
-  <th>전날가</th>
-  <th>현재가</th>
-  <th>전일대비</th>
-  <th>시총(₩)</th>
-  <th>괴리</th>
-  <th>하방</th>
-  <th>유형</th>
-</tr>
-</thead>
-<tbody id="stockList"></tbody>
+<table>
+  <thead>
+    <tr>
+      <th>티커</th>
+      <th>전일비</th>
+      <th>유형</th>
+      <th>종합</th>
+    </tr>
+  </thead>
+  <tbody id="resultTable"></tbody>
 </table>
-</div>
 
+<script src="data.js"></script>
 <script src="logic.js"></script>
 <script src="app.js"></script>
 <script>
-registerSW();
-renderMainList();
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
 </script>
 </body>
 </html>

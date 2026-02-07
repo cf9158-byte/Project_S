@@ -1,8 +1,35 @@
-.table-wrap{overflow-x:auto;}
-.sticky{
- position:sticky;
- left:0;
- background:#161b22;
- z-index:2;
+body {
+  margin: 0;
+  font-family: system-ui;
+  background: #0e0e0e;
+  color: #eee;
 }
-.detail p{line-height:1.6}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: #151515;
+}
+
+button {
+  background: #2c2c2c;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #333;
+}
+
+a {
+  color: #4da6ff;
+}

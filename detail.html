@@ -2,22 +2,36 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>SR Board - Detail</title>
+<title>Detail</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="app-header">
+
+<header>
   <button onclick="history.back()">←</button>
-  <h1>종목상세</h1>
+  <h2 id="tickerTitle"></h2>
 </header>
 
-<main id="detailContainer" class="detail"></main>
+<div id="detailBox"></div>
 
 <script src="logic.js"></script>
-<script src="app.js"></script>
+<script src="data.js"></script>
 <script>
-renderDetail();
+const ticker = new URLSearchParams(location.search).get('t');
+const data = mockData.find(d => d.ticker === ticker);
+const result = analyzeStock(data);
+
+document.getElementById('tickerTitle').innerText = ticker;
+document.getElementById('detailBox').innerHTML = `
+<p>금일 폭발 가능성: ${result.probability}%</p>
+<p>예상 시점: ${result.timing}</p>
+<p>폭발 규모: ${result.size}</p>
+<p>목표가: ${result.target.min} / ${result.target.avg} / ${result.target.max}</p>
+<p>세력 추정 평단: ${result.avg}</p>
+<p>공포 유도 하락 가능: ${result.fearDrop}%</p>
+<p>분석 신뢰도: ${result.confidence}%</p>
+`;
 </script>
 </body>
 </html>
